@@ -25,7 +25,7 @@ const EditTicketForm = (id, title, description) => {
             console.log(data);
             if (res.status === 200) {
             //rerender
-            router.replace("/");
+            router.push("/");
             } else {
             console.error("Error creating ticket!");
             }

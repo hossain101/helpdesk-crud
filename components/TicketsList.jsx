@@ -27,6 +27,7 @@ export async function getTickets() {
 
 const TicketsList = async () => {
   const tickets = await getTickets();
+  
 
   if (!tickets || tickets.length === 0) {
     return (
@@ -37,6 +38,9 @@ const TicketsList = async () => {
   }
 
   return (
+
+    
+
     
     <>
       {tickets.map((ticket) => (

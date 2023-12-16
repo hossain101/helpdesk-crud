@@ -13,7 +13,7 @@ const RemoveBtn = ({ id }) => {
       await fetch(`http://localhost:3000/api/tickets?id=${id}`, {
         method: "DELETE",
       });
-       window.location.reload();
+     window.location.reload();  
     }
   };
 
