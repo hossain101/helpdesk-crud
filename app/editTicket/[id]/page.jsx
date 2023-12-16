@@ -41,4 +41,4 @@ const EditTicket =  async ({params}) => {
   )
 }
 
-export default EditTicket
+export default EditTicket;
