@@ -17,7 +17,7 @@ export async function getTickets() {
       throw new Error(`Failed to fetch tickets: ${res.status}`);
     }
     const tickets = await res.json();
-    console.log(tickets);
+   
     return tickets;
   } catch (error) {
     console.error("Error Loading Tickets", error);
@@ -57,7 +57,7 @@ const TicketsList = async () => {
             </div>
 
             <div className="flex gap-2 ">
-              <RemoveBtn />
+              <RemoveBtn  id={ticket._id}/>
 
               <Link href={`/editTickets/${ticket._id}`} as="">
                 <HiPencilAlt size={24} />

@@ -25,8 +25,9 @@ const AddTicket = () => {
       console.log(data);
       if (res.status === 201) {
         //rerender
-        router.refresh();
-        router.push("/");
+        
+        router.replace("/");
+       
       } else {
         console.error("Error creating ticket!");
       }
