@@ -3,6 +3,7 @@ import RemoveBtn from "./RemoveBtn";
 import Link from "next/link";
 import { HiPencilAlt } from "react-icons/hi";
 
+
 export async function getTickets() {
   try {
     const res = await fetch(
@@ -36,8 +37,10 @@ const TicketsList = async () => {
   }
 
   return (
+    
     <>
       {tickets.map((ticket) => (
+        
         <div key={ticket._id}>
           <div className="p-4 border my-3 mx-3 flex justify-between gap-5 items-start rounded-lg bg-orange-200">
             <div className=" ">

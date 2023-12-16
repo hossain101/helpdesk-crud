@@ -25,7 +25,7 @@ const AddTicket = () => {
       console.log(data);
       if (res.status === 201) {
         //rerender
-        router.replace(router.asPath);
+        router.refresh();
         router.push("/");
       } else {
         console.error("Error creating ticket!");
@@ -36,21 +36,21 @@ const AddTicket = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center  min-h-screen bg-gradient-to-r from-green-400 to-blue-500 px-8">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-green-400 to-blue-500 px-8">
       <form
         className="w-full max-w-lg bg-slate-600 rounded-lg shadow-md p-6"
         onSubmit={handleSubmit}
       >
         <div className="divide-y divide-gray-200">
           <input
-            className="text-sm text-gray-400 rounded-lg w-full py-3 px-4 leading-tight focus:outline-none focus:shadow-outline mb-4"
+            className="text-sm text-black placeholder-gray-400 rounded-lg w-full py-3 px-4 leading-tight focus:outline-none focus:shadow-outline mb-4"
             type="text"
             placeholder="Ticket Title"
             onChange={(e) => setTitle(e.target.value)}
             value={title}
           />
           <input
-            className="text-sm text-gray-400 rounded-lg w-full py-3 px-4 leading-tight focus:outline-none focus:shadow-outline mt-4 mb-6"
+            className="text-sm text-black placeholder-gray-400 rounded-lg w-full py-3 px-4 leading-tight focus:outline-none focus:shadow-outline mt-4 mb-6"
             type="text"
             placeholder="Ticket Description"
             onChange={(e) => setDescription(e.target.value)}
