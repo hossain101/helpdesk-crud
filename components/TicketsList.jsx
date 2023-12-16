@@ -63,7 +63,7 @@ const TicketsList = async () => {
             <div className="flex gap-2 ">
               <RemoveBtn  id={ticket._id}/>
 
-              <Link href={`/editTickets/${ticket._id}`} >
+              <Link href={`/editTicket/${ticket._id}`} >
                 <HiPencilAlt size={24} />
               </Link>
             </div>

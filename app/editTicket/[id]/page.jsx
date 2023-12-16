@@ -32,8 +32,8 @@ const EditTicket =  async ({params}) => {
   
   const ticket = await getTopicById(id);
 
-  const title = ticket.title;
-  const description = ticket.description;
+  const title = ticket?.title;
+  const description = ticket?.description;
 
   
   return (
