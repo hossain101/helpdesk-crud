@@ -1,13 +1,13 @@
-'use client';
-import { useState } from 'react';
-import { HiOutlineTrash, HiOutlineCheck, HiOutlineX } from 'react-icons/hi';
+"use client";
+import { useState } from "react";
+import { HiOutlineTrash, HiOutlineCheck, HiOutlineX } from "react-icons/hi";
 
 const RemoveBtn = ({ id }) => {
   const [showModal, setShowModal] = useState(false);
 
   const deleteTicket = async () => {
-    await fetch(`http://localhost:3000/api/tickets?id=${id}`||`https://helpdesk-crud.onrender.com/api/${id}`, {
-      method: 'DELETE',
+    await fetch(`/api/tickets?id=${id}`, {
+      method: "DELETE",
     });
     window.location.reload();
   };
@@ -15,7 +15,7 @@ const RemoveBtn = ({ id }) => {
   return (
     <>
       <button onClick={() => setShowModal(true)}>
-        <HiOutlineTrash size={24} color='red' />
+        <HiOutlineTrash size={24} color="red" />
       </button>
 
       {showModal && (
@@ -27,7 +27,9 @@ const RemoveBtn = ({ id }) => {
             className="bg-white p-6 rounded-lg shadow-xl"
             onClick={(e) => e.stopPropagation()}
           >
-            <p className="mb-4 text-lg font-semibold">Are you sure you want to delete this ticket?</p>
+            <p className="mb-4 text-lg font-semibold">
+              Are you sure you want to delete this ticket?
+            </p>
             <div className="flex gap-4">
               <button
                 className="flex items-center gap-2 px-4 py-2 text-white bg-green-500 rounded hover:bg-green-600"

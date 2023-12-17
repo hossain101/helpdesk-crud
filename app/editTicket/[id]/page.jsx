@@ -1,16 +1,13 @@
 import EditTicketForm from "@/components/EditTicketForm";
 
 const getTopicById = async (id) => {
+  const SITE_URL = process.env.SITE_URL;
   try {
-    const res = await fetch(
-      `http://localhost:3000/api/${id}` ||
-        `https://helpdesk-crud.onrender.com/api/${id}`,
-      {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-        cache: "no-store",
-      }
-    );
+    const res = await fetch(`${SITE_URL}/api/${id}`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+      cache: "no-store",
+    });
 
     const data = await res.json();
     console.log(data);
@@ -20,7 +17,7 @@ const getTopicById = async (id) => {
       console.error("Error fetching ticket!");
     }
   } catch (error) {
-    console.error(error); 
+    console.error(error);
   }
 };
 
@@ -32,11 +29,8 @@ const EditTicket = async ({ params }) => {
 
   const ticket = await getTopicById(id);
 
-
-  const title =await ticket?.title;
-  const description =await ticket?.description;
-
-
+  const title = await ticket?.title;
+  const description = await ticket?.description;
 
   return <EditTicketForm id={id} title={title} description={description} />;
 };

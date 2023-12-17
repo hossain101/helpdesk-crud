@@ -16,23 +16,19 @@ const EditTicketForm = ({ id, title, description }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch(
-        `http://localhost:3000/api/${id}` ||
-          `https://helpdesk-crud.onrender.com/api/${id}`,
-        {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            newTitle: newTitle,
-            newDescription: newDescription,
-          }),
-        }
-      );
+      const res = await fetch(`/api/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          newTitle: newTitle,
+          newDescription: newDescription,
+        }),
+      });
       const data = await res.json();
 
       if (res.status === 200) {
         //rerender
-        router.refresh();
+        router.refresh('/');
         router.push("/");
       } else {
         console.error("Error creating ticket!");
@@ -85,7 +81,6 @@ const EditTicketForm = ({ id, title, description }) => {
             e.target.style.height = "auto";
             e.target.style.height = e.target.scrollHeight + "px";
           }}
-       
         />
         <button
           className="w-full py-3 px-4 leading-none text-white bg-purple-500 hover:bg-purple-600 rounded-lg tracking-wide transform transition duration-500 ease-in-out hover:scale-105 flex items-center justify-center"

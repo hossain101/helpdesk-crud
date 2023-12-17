@@ -4,10 +4,10 @@ import Link from "next/link";
 import { HiPencilAlt } from "react-icons/hi";
 
 export async function getTickets() {
+  const SITE_URL = process.env.SITE_URL
   try {
     const res = await fetch(
-      "http://localhost:3000/api/tickets" ||
-        "https://helpdesk-crud.onrender.com/api/tickets",
+    `${SITE_URL}/api/tickets` ,
       {
         cache: "no-store",
       }
