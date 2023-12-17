@@ -7,17 +7,28 @@ export const POST = async (request) => {
     const { title, description } = await request.json();
 
     if (!title || !description) {
-      return NextResponse.json({ message: "Title and description are required" }, { status: 400 });
+      return NextResponse.json(
+        { message: "Title and description are required" },
+        { status: 400 }
+      );
     }
 
     await connectMongoDB();
 
     const ticket = await Ticket.create({ title, description });
+    
 
-    return NextResponse.json({ message: "Ticket created successfully!", ticket }, { status: 201 });
+    return NextResponse.json(
+      { message: "Ticket created successfully!", ticket },
+      { status: 201 }
+    );
+    
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ message: "An error occurred while creating the ticket" }, { status: 500 });
+    return NextResponse.json(
+      { message: "An error occurred while creating the ticket" },
+      { status: 500 }
+    );
   }
 };
 
@@ -30,7 +41,10 @@ export const GET = async () => {
     return NextResponse.json(tickets, { status: 200 });
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ message: "An error occurred while fetching the tickets" }, { status: 500 });
+    return NextResponse.json(
+      { message: "An error occurred while fetching the tickets" },
+      { status: 500 }
+    );
   }
 };
 
@@ -47,12 +61,21 @@ export const DELETE = async (request) => {
     const deletedTicket = await Ticket.findByIdAndDelete(id);
 
     if (!deletedTicket) {
-      return NextResponse.json({ message: "No ticket found with this ID" }, { status: 404 });
+      return NextResponse.json(
+        { message: "No ticket found with this ID" },
+        { status: 404 }
+      );
     }
 
-    return NextResponse.json({ message: "Ticket deleted successfully!" }, { status: 200 });
+    return NextResponse.json(
+      { message: "Ticket deleted successfully!" },
+      { status: 200 }
+    );
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ message: "An error occurred while deleting the ticket" }, { status: 500 });
+    return NextResponse.json(
+      { message: "An error occurred while deleting the ticket" },
+      { status: 500 }
+    );
   }
 };

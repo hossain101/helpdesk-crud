@@ -1,8 +1,8 @@
+
 import React from "react";
 import RemoveBtn from "./RemoveBtn";
 import Link from "next/link";
 import { HiPencilAlt } from "react-icons/hi";
-
 
 export async function getTickets() {
   try {
@@ -27,6 +27,7 @@ export async function getTickets() {
 
 const TicketsList = async () => {
   const tickets = await getTickets();
+  
   
 
   if (!tickets || tickets.length === 0) {

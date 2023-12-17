@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-
+import { revalidatePath } from "next/cache";
 const AddTicket = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -25,9 +25,10 @@ const AddTicket = () => {
       console.log(data);
       if (res.status === 201) {
         //rerender
-        
-        router.replace("/");
-       
+        // router.refresh()
+
+        router.refresh();
+        router.push("/");
       } else {
         console.error("Error creating ticket!");
       }
