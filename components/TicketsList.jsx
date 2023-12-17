@@ -1,4 +1,3 @@
-
 import React from "react";
 import RemoveBtn from "./RemoveBtn";
 import Link from "next/link";
@@ -17,7 +16,7 @@ export async function getTickets() {
       throw new Error(`Failed to fetch tickets: ${res.status}`);
     }
     const tickets = await res.json();
-   
+
     return tickets;
   } catch (error) {
     console.error("Error Loading Tickets", error);
@@ -27,8 +26,6 @@ export async function getTickets() {
 
 const TicketsList = async () => {
   const tickets = await getTickets();
-  
-  
 
   if (!tickets || tickets.length === 0) {
     return (
@@ -39,39 +36,39 @@ const TicketsList = async () => {
   }
 
   return (
-
-    
-
-    
-    <>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
       {tickets.map((ticket) => (
-        
-        <div key={ticket._id}>
-          <div className="p-4 border my-3 mx-3 flex justify-between gap-5 items-start rounded-lg bg-orange-200">
-            <div className=" ">
-              <h2 className="font-bold ">{ticket.title}</h2>
-              <p>{ticket.description}</p>
-              <p className="text-sm text-gray-400">
-                Created:
-                {new Date(ticket.createdAt).toLocaleDateString("en-US")}
-              </p>
-              <p className="text-sm text-gray-400">
-                Updated:
-                {new Date(ticket.updatedAt).toLocaleDateString("en-US")}
-              </p>
-            </div>
-
-            <div className="flex gap-2 ">
-              <RemoveBtn  id={ticket._id}/>
-
-              <Link href={`/editTicket/${ticket._id}`} >
-                <HiPencilAlt size={24} />
-              </Link>
-            </div>
+        <div
+          key={ticket._id}
+          className="rounded-lg overflow-hidden shadow-lg p-6 bg-white dark:bg-gray-800"
+        >
+          <h3 className="font-bold text-2xl mb-2 text-gray-900 dark:text-white">
+            Issue:  {ticket.title}
+          </h3>
+         
+          <h3 className="text-gray-50 dark:text-gray-50 text-base mb-4">
+            Details: {ticket.description}
+          </h3>
+          <div className="pt-4 pb-2">
+            <span className="inline-block bg-blue-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 dark:text-gray-900 mr-2 mb-2">
+              Created: {new Date(ticket.createdAt).toLocaleDateString("en-US")}
+            </span>
+            <span className="inline-block bg-blue-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 dark:text-gray-900 mr-2 mb-2">
+              Updated: {new Date(ticket.updatedAt).toLocaleDateString("en-US")}
+            </span>
+          </div>
+          <div className="flex items-center justify-between mt-4">
+            <RemoveBtn id={ticket._id} />
+            <Link href={`/editTicket/${ticket._id}`}>
+              <HiPencilAlt
+                size={24}
+                className="text-gray-900 dark:text-white"
+              />
+            </Link>
           </div>
         </div>
       ))}
-    </>
+    </div>
   );
 };
 

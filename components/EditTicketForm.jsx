@@ -3,9 +3,13 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import { useState } from "react";
 
+import { IoMdAddCircleOutline, IoMdRefreshCircle } from "react-icons/io";
+
 const EditTicketForm = ({ id, title, description }) => {
   const [newTitle, setNewTitle] = useState(title);
   const [newDescription, setNewDescription] = useState(description);
+  const [darkMode, setDarkMode] = useState(false);
+  const toggleDarkMode = () => setDarkMode(!darkMode);
 
   const router = useRouter();
 
@@ -25,10 +29,10 @@ const EditTicketForm = ({ id, title, description }) => {
         }
       );
       const data = await res.json();
-      console.log(data);
+
       if (res.status === 200) {
         //rerender
-       router.refresh();
+        router.refresh();
         router.push("/");
       } else {
         console.error("Error creating ticket!");
@@ -39,23 +43,55 @@ const EditTicketForm = ({ id, title, description }) => {
   };
 
   return (
-    <div className="p-4 border my-3 mx-3  gap-5 ">
-      <form className="flex flex-col gap-3 " onSubmit={handleSubmit}>
+    <div
+      className={`flex flex-col items-center justify-center min-h-screen px-8 ${
+        darkMode ? "bg-gray-900" : "bg-gradient-to-r from-green-400 to-blue-500"
+      }`}
+    >
+      <button
+        onClick={toggleDarkMode}
+        className={`mb-4 py-2 px-4 rounded-full font-bold tracking-wide transform transition duration-500 ease-in-out hover:scale-105 ${
+          darkMode ? "text-gray-900 bg-yellow-300" : "text-white bg-gray-600"
+        }`}
+      >
+        Toggle Dark Mode
+      </button>
+      <form
+        className={`w-full max-w-2xl ${
+          darkMode ? "bg-gray-800 text-white" : "bg-white text-gray-900"
+        } rounded-lg shadow-md p-6 flex flex-col space-y-4`}
+        onSubmit={handleSubmit}
+      >
+        <h2 className="text-2xl font-bold text-center">Add Ticket</h2>
         <input
-          className="border border-slate-800 px-8 py-2 "
+          className="text-sm placeholder-gray-400 rounded-lg w-full py-3 px-4 leading-tight focus:outline-none focus:shadow-outline"
           type="text"
-          value={newTitle}
+          placeholder="Ticket Title"
           onChange={(e) => setNewTitle(e.target.value)}
+          value={newTitle}
         />
-        <input
-          className="border border-slate-800 px-8 py-2 "
-          type="text"
-          value={newDescription}
+        <textarea
+          className="resize-none text-sm placeholder-gray-400 rounded-lg w-full py-3 px-4 leading-tight focus:outline-none focus:shadow-outline min-h-[size]"
+          placeholder="Ticket Description"
           onChange={(e) => setNewDescription(e.target.value)}
+          value={newDescription}
+          style={{
+            overflow: "hidden",
+            overflowWrap: "break-word",
+            resize: "none",
+            height: "auto",
+          }}
+          onInput={(e) => {
+            e.target.style.height = "auto";
+            e.target.style.height = e.target.scrollHeight + "px";
+          }}
+       
         />
-
-        <button className="bg-slate-800 text-white px-8 py-2 rounded hover:bg-slate-700 transition-colors w-fit">
-          Update Ticket
+        <button
+          className="w-full py-3 px-4 leading-none text-white bg-purple-500 hover:bg-purple-600 rounded-lg tracking-wide transform transition duration-500 ease-in-out hover:scale-105 flex items-center justify-center"
+          type="submit"
+        >
+          <IoMdAddCircleOutline size={24} className="mr-2" /> Add Ticket
         </button>
       </form>
     </div>
