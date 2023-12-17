@@ -11,6 +11,8 @@ export const PUT = async (request, { params }) => {
 
     const updatedTicket = await Ticket.findByIdAndUpdate(id, { title, description });
 
+    console.log(updatedTicket);
+
     if (!updatedTicket) {
       return NextResponse.json({ message: "No ticket found with this ID" }, { status: 404 });
     }

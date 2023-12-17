@@ -1,10 +1,10 @@
-import EditTicketForm from '@/components/EditTicketForm'
+import EditTicketForm from "@/components/EditTicketForm";
 
 const getTopicById = async (id) => {
   try {
     const res = await fetch(
-      `http://localhost:3000/api/tickets/${id}` ||
-        `https://helpdesk-crud.onrender.com/api/tickets/${id}`,
+      `http://localhost:3000/api/${id}` ||
+        `https://helpdesk-crud.onrender.com/api/${id}`,
       {
         method: "GET",
         headers: { "Content-Type": "application/json" },
@@ -12,7 +12,6 @@ const getTopicById = async (id) => {
       }
     );
 
-    
     const data = await res.json();
     console.log(data);
     if (res.status === 200) {
@@ -21,24 +20,25 @@ const getTopicById = async (id) => {
       console.error("Error fetching ticket!");
     }
   } catch (error) {
-}
+    console.error(error); 
+  }
 };
 
+const EditTicket = async ({ params }) => {
+  const { id } = params;
+  console.log("Now I am in editTicket/%5Bid%5D/page.jsx");
 
-const EditTicket =  async ({params}) => {
-  const {id} = params;
   console.log(id);
 
-  
   const ticket = await getTopicById(id);
 
-  const title = ticket?.title;
-  const description = ticket?.description;
 
-  
-  return (
-    <EditTicketForm id={id} title={title} description={description} />
-  )
-}
+  const title =await ticket?.title;
+  const description =await ticket?.description;
+
+
+
+  return <EditTicketForm id={id} title={title} description={description} />;
+};
 
 export default EditTicket;
