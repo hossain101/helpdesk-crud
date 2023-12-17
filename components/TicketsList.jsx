@@ -37,38 +37,42 @@ const TicketsList = async () => {
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
-      {tickets.map((ticket) => (
-        <div
-          key={ticket._id}
-          className="rounded-lg overflow-hidden shadow-lg p-6 bg-white dark:bg-gray-800"
-        >
-          <h3 className="font-bold text-2xl mb-2 text-gray-900 dark:text-white">
-            Issue:  {ticket.title}
-          </h3>
-         
-          <h3 className="text-gray-50 dark:text-gray-50 text-base mb-4">
-            Details: {ticket.description}
-          </h3>
-          <div className="pt-4 pb-2">
-            <span className="inline-block bg-blue-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 dark:text-gray-900 mr-2 mb-2">
-              Created: {new Date(ticket.createdAt).toLocaleDateString("en-US")}
-            </span>
-            <span className="inline-block bg-blue-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 dark:text-gray-900 mr-2 mb-2">
-              Updated: {new Date(ticket.updatedAt).toLocaleDateString("en-US")}
-            </span>
-          </div>
-          <div className="flex items-center justify-between mt-4">
-            <RemoveBtn id={ticket._id} />
-            <Link href={`/editTicket/${ticket._id}`}>
-              <HiPencilAlt
-                size={24}
-                className="text-gray-900 dark:text-white"
-              />
-            </Link>
+    {tickets.map((ticket, index) => (
+      <div
+        key={ticket._id}
+        className="rounded-lg overflow-hidden shadow-lg p-6 bg-white dark:bg-gray-800"
+      >
+        <div className="flex justify-start items-center">
+          <div className="rounded-full h-8 w-8 bg-white flex items-center justify-center mb-4">
+            <span className="text-gray-900">{index + 1}</span>
           </div>
         </div>
-      ))}
-    </div>
+        <h3 className="font-bold text-2xl mb-2 text-gray-900 dark:text-white">
+          Issue:  {ticket.title}
+        </h3>
+        <h3 className="text-gray-50 dark:text-gray-50 text-base mb-4">
+          Details: {ticket.description}
+        </h3>
+        <div className="pt-4 pb-2">
+          <span className="inline-block bg-blue-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 dark:text-gray-900 mr-2 mb-2">
+            Created: {new Date(ticket.createdAt).toLocaleDateString("en-US")}
+          </span>
+          <span className="inline-block bg-blue-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 dark:text-gray-900 mr-2 mb-2">
+            Updated: {new Date(ticket.updatedAt).toLocaleDateString("en-US")}
+          </span>
+        </div>
+        <div className="flex items-center justify-between mt-4">
+          <RemoveBtn id={ticket._id} />
+          <Link href={`/editTicket/${ticket._id}`}>
+            <HiPencilAlt
+              size={24}
+              className="text-gray-900 dark:text-white"
+            />
+          </Link>
+        </div>
+      </div>
+    ))}
+  </div>
   );
 };
 
