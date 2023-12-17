@@ -6,7 +6,7 @@ const RemoveBtn = ({ id }) => {
   const [showModal, setShowModal] = useState(false);
 
   const deleteTicket = async () => {
-    await fetch(`http://localhost:3000/api/tickets?id=${id}`, {
+    await fetch(`http://localhost:3000/api/tickets?id=${id}`||`https://helpdesk-crud.onrender.com/api/${id}`, {
       method: 'DELETE',
     });
     window.location.reload();
